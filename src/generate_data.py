@@ -71,13 +71,41 @@ def gen_dialogues_and_messages(clients: pd.DataFrame):
 
     for _ in range(N_DIALOGUES):
         client_id = random.randint(1, len(clients))
+        segment = clients.loc[clients["client_id"] == client_id, "segment"].iloc[0]
+
+        # канал
         channel = random.choices(["chat", "email", "phone"], weights=[0.6, 0.3, 0.1])[0]
+
+        # длительность зависит от канала и сегмента
+        base_duration = {"chat": 25, "email": 45, "phone": 15}[channel]
+        segment_factor = {"new": 1.2, "regular": 1.0, "vip": 0.8}[segment]
+        duration = max(3, int(random.gauss(base_duration * segment_factor, 10)))
+
         started = now - timedelta(days=random.randint(0, 90),
                                   minutes=random.randint(0, 1440))
-        duration = random.randint(3, 60)
         ended = started + timedelta(minutes=duration)
+
+        # базовая вероятность эскалации
+        base_p = 0.15
+
+        # канал: email решается лучше, chat чаще эскалируют, phone — средний
+        channel_factor = {"chat": 1.8, "email": 0.4, "phone": 0.6}[channel]
+
+        # сегмент: VIP решают быстрее, new — сложнее
+        segment_factor = {"new": 1.3, "regular": 1.0, "vip": 0.5}[segment]
+
+        # длительность нормируем к 30 минутам
+        duration_factor = duration / 30.0
+
+        p_escalated = min(0.85, base_p * channel_factor * segment_factor * duration_factor)
+        p_abandoned = 0.05
+
+        # оставшееся — resolved
+        p_resolved = max(0.05, 1.0 - p_escalated - p_abandoned)
+
         status = random.choices(
-            ["resolved", "escalated", "abandoned"], weights=[0.75, 0.15, 0.10]
+            ["resolved", "escalated", "abandoned"],
+            weights=[p_resolved, p_escalated, p_abandoned],
         )[0]
 
         dialogues.append({

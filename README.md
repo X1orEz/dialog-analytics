@@ -13,6 +13,8 @@ End-to-end сервис анализа диалогов поддержки: SQL 
 - [x] SQL-запросы и метрики
 - [x] EDA-ноутбук
 - [x] Метрики в `src/metrics.py`
+- [x] Статистика и A/B (`src/stats.py`)
+- [x] ML-метрики (`src/evaluate.py`)
 - [ ] LLM-разметка
 - [ ] FastAPI + Dockerfile
 - [ ] ETL и дашборд
