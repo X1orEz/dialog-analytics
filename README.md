@@ -8,9 +8,9 @@ End-to-end сервис анализа диалогов поддержки: SQL 
 - [x] Структура репозитория
 - [x] PostgreSQL в Docker Compose
 - [x] Схема БД
-- [ ] Генерация синтетических данных
-- [ ] Загрузка данных в БД
-- [ ] SQL-запросы и метрики
+- [x] Генерация синтетических данных
+- [x] Загрузка данных в БД
+- [x] SQL-запросы и метрики
 - [ ] EDA-ноутбук
 - [ ] LLM-разметка
 - [ ] FastAPI + Dockerfile
@@ -19,3 +19,5 @@ End-to-end сервис анализа диалогов поддержки: SQL 
 ## Быстрый старт
 cp .env.example .env
 docker compose up -d
+python -m src.generate_data
+python -m src.db
