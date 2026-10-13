@@ -70,6 +70,7 @@ CSV → PostgreSQL → pandas → LLM-разметка → метрики → Fa
 7. Открой API:
    - Swagger UI: http://localhost:8000/docs
    - Health: http://localhost:8000/health
+   - Дашборд: http://localhost:8501
 
 ## API
 
@@ -129,8 +130,8 @@ dialog-analytics/
 - [x] Оценка качества разметки (Cohen's kappa)
 - [x] FastAPI-сервис с `/label`, `/metrics`, `/health`
 - [x] Docker: API + Postgres + Ollama
-- [ ] Streamlit-дашборд
-- [ ] ETL-пайплайн по расписанию
+- [x] Streamlit-дашборд с фильтрами
+- [x] ETL-пайплайн (`src/etl.py`)
 
 ## Метрики
 
