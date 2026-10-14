@@ -1,5 +1,10 @@
 # Dialog Analytics
 
+[![CI](https://github.com/X1orEz/dialog-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/X1orEz/dialog-analytics/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![Docker](https://img.shields.io/badge/docker-compose-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 End-to-end сервис анализа диалогов поддержки: SQL → pandas → LLM-разметка → метрики → FastAPI → дашборд.
 
 Стек: **Python 3.12, PostgreSQL, Docker, FastAPI, Ollama (LLM), Streamlit**.
@@ -114,6 +119,13 @@ dialog-analytics/
 ├── Dockerfile
 ├── docker-compose.yml
 └── pyproject.toml
+```
+
+## Тесты
+
+```bash
+pytest tests/ -v
+pytest tests/ --cov=src --cov-report=term-missing
 ```
 
 ## Что сделано
