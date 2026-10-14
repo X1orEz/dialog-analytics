@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Run tests
+        env:
+          POSTGRES_USER: ds
+          POSTGRES_PASSWORD: ds_pass
+          POSTGRES_DB: dialog_analytics
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          LLM_PROVIDER: ollama
+          LLM_API_KEY: ollama
+          LLM_MODEL: llama3.2:3b
+          LLM_BASE_URL: http://localhost:11434/v1
+        run: pytest tests/ -v
