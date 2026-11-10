@@ -33,7 +33,7 @@ CSV → PostgreSQL → pandas → LLM-разметка → метрики → Fa
 | `postgres` | 5432  | База данных                   |
 | `ollama`   | 11434 | Локальный LLM-сервер          |
 | `api`      | 8000  | FastAPI-сервис                |
-| `dashboard`| 8501  | Streamlit-дашборд (День 6)    |
+| `dashboard`| 8501  | Streamlit-дашборд             |
 
 ## Быстрый старт
 
